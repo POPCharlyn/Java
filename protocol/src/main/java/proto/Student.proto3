@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option java_package = "com.zy.protocol";
+
+message Student {
+  string username = 1;
+  string password = 2;
+  string email = 3;
+  int32 age = 4;
+  fixed64 timespane = 5;
+  double dValue = 6;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
