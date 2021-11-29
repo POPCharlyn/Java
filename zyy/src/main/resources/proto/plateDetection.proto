@@ -1,0 +1,48 @@
+syntax = "proto2";
+
+package apollo.plateDetection;
+
+message Picture{
+  optional uint32 height = 1;  // image height, that is, number of rows
+  optional uint32 width = 2;   // image width, that is, number of columns
+
+  optional string encoding = 3;
+  optional uint32 step = 4;  // Full row length in bytes
+  optional bytes data = 5;   // actual matrix data, size is (step * rows)
+}
+
+message Point2D {
+  optional double x = 1 [default = 0];
+  optional double y = 2 [default = 0];
+}
+
+message ParkingImage {
+  optional string frame_id = 2;
+  optional double measurement_time = 3;
+
+  optional uint32 height = 4;  // image height, that is, number of rows
+  optional uint32 width = 5;   // image width, that is, number of columns
+  optional string encoding = 6;
+  optional uint32 step = 7;  // Full row length in bytes
+  optional bytes data = 8;   // actual matrix data, size is (step * rows)
+
+  repeated Picture picture = 9;    //yujun ：多张照片
+  optional int32 positionType = 10; //yujun  : 图像中的车牌相对于巡检车辆的位置
+  optional string parkingId = 11; //yujun  : 停车位id
+  repeated Point2D polygon_point = 12;  // yujun: 车位坐标
+  optional float relativeAngle = 13;  //yujun  : 图像中的车辆相对于巡检车的角度
+  optional float distance = 14;  //yujun  : 图像中的车辆相对于巡检车的距离 
+  optional int32 parkingType = 15; //yujun: 停车位类型
+  optional string primaryID = 16; //yujjun:停车位主键ID
+  optional string parkingLotId = 17; //yujun:停车场ID
+  optional bool needDetect = 18; //yujun: 是否需要检测车牌
+  optional string licensePlate = 19; //yujun :车牌
+  optional bool obtainObstacle = 20; //fupeng
+  optional float recognitionConfidence = 21;//fupeng
+  repeated string imagesName = 22; //fupeng
+}
+
+message ParkingPublish {
+	repeated ParkingImage pimage=1;	
+}
+
